@@ -9,7 +9,7 @@ use yii\web\NotFoundHttpException;
 /**
  * BooksController implements the CRUD actions for Books model.
  */
-class BooksController extends MainController
+class BooksController extends MainController implements Template
 {
     /**
      * Updates an existing Books model.

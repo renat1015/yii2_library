@@ -12,7 +12,7 @@ use yii\web\NotFoundHttpException;
 /**
  * ReadersController implements the CRUD actions for Readers model.
  */
-class ReadersController extends MainController
+class ReadersController extends MainController implements Template
 {
     /**
      * Updates an existing Readers model.
