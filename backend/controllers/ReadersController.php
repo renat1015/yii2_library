@@ -2,8 +2,11 @@
 
 namespace backend\controllers;
 
+use backend\models\Books;
+use backend\models\BooksReaders;
 use backend\models\Readers;
 use backend\models\ReadersSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -92,9 +95,22 @@ class ReadersController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $booksReaders = new BooksReaders();
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $booksReaders->load($this->request->post())) {
+            $book = Books::findOne(['id' => $booksReaders->books_id]);
+
+            if ($book->count > 0) {
+                $book->count = $book->count - 1;
+
+                if ($booksReaders->save()) {
+                    if ($book->save()) return $this->redirect(['index']);
+                } else {
+                    Yii::$app->session->setFlash('warning', 'The user has already received this book.');
+                }
+            } else {
+                Yii::$app->session->setFlash('warning', 'Unable to check out the book. The number of books is not enough.');
+            }
         }
 
         return $this->render('update', [

@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'count',
             [
                 'class' => ActionColumn::className(),
+                'template' => '{update} {delete}',
                 'urlCreator' => function ($action, Books $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
