@@ -2,15 +2,15 @@
 
 namespace backend\models;
 
-use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Books;
 
 /**
  * BooksSearch represents the model behind the search form of `backend\models\Books`.
  */
 class BooksSearch extends Books
 {
+    use Scenarios;
+
     /**
      * {@inheritdoc}
      */
@@ -20,15 +20,6 @@ class BooksSearch extends Books
             [['id', 'count'], 'integer'],
             [['title', 'author', 'description'], 'safe'],
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
     }
 
     /**

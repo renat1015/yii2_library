@@ -2,15 +2,15 @@
 
 namespace backend\models;
 
-use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Readers;
 
 /**
  * ReadersSearch represents the model behind the search form of `backend\models\Readers`.
  */
 class ReadersSearch extends Readers
 {
+    use Scenarios;
+
     /**
      * {@inheritdoc}
      */
@@ -20,15 +20,6 @@ class ReadersSearch extends Readers
             [['id'], 'integer'],
             [['name', 'surname', 'email'], 'safe'],
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
     }
 
     /**
